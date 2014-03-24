@@ -19,7 +19,6 @@
     </target>
 
     <target name="run">
-        
         <java classname="jtp.Zadanie">
             <classpath>
                 <path location="build/jar/Zadanie.jar"/>
