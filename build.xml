@@ -1,0 +1,30 @@
+<project name="Zadanie" default="compile">
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac includeantruntime="true" srcdir="src" destdir="build/classes"/>
+    </target>
+
+    <target name="jar">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/Zadanie.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="jtp.Zadanie"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run">
+        
+        <java classname="jtp.Zadanie">
+            <classpath>
+                <path location="build/jar/Zadanie.jar"/>
+            </classpath>
+        </java>
+    </target>
+
+</project>
