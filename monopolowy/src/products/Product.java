@@ -5,7 +5,7 @@ package products;
  *
  * @author Mateusz Kmiecik
  */
-public class Product {
+public abstract class Product {
 
     private String name;
     private final double voltage;
@@ -45,7 +45,8 @@ public class Product {
 
     @Override
     public String toString() {
-        return "name: " + name +
+        return this.getClass().getSimpleName() + " " +
+                "name: " + name +
                 ", voltage: " + voltage +
                 ", volume: " + volume +
                 ", price: " + price +
