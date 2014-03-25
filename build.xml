@@ -11,17 +11,17 @@
 
     <target name="jar">
         <mkdir dir="build/jar"/>
-        <jar destfile="build/jar/Zadanie.jar" basedir="build/classes">
+        <jar destfile="build/jar/Shop.jar" basedir="build/classes">
             <manifest>
-                <attribute name="Main-Class" value="jtp.Zadanie"/>
+                <attribute name="Main-Class" value="Shop"/>
             </manifest>
         </jar>
     </target>
 
     <target name="run">
-        <java classname="jtp.Zadanie">
+        <java classname="Shop">
             <classpath>
-                <path location="build/jar/Zadanie.jar"/>
+                <path location="build/jar/Shop.jar"/>
             </classpath>
         </java>
     </target>

@@ -15,7 +15,7 @@ public class Depot implements DepotInterface {
     private ArrayList<Product> products;
 
     /**
-     * Domyślny konstruktor.
+     * Domyslny konstruktor.
      */
     public Depot() {
         this.products = new ArrayList<Product>();
@@ -48,7 +48,7 @@ public class Depot implements DepotInterface {
 
     /**
      * Zwraca aktualna ilosc produktow w magazynie.
-     * @return
+     * @return ilosc produktow
      */
     public int currentSize(){
         return products.size();
