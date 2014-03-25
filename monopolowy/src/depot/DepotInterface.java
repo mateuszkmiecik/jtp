@@ -14,4 +14,7 @@ public interface DepotInterface  {
     public Product take(String name)  throws NotFoundInDepotException;
     public String toString();
 
+    public void prepare();
+    public int currentSize();
+
 }

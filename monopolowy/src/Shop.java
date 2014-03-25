@@ -13,22 +13,36 @@ import java.util.ArrayList;
 public class Shop {
 
     public static void main(String[] args){
-        Product a = new Vodka("Sobieski", Volume.LITER.getVolume(), 39.50);
-        Product b = new Beer("Na miodzie gryczanym", Volume.HALF.getVolume(), 5.50);
-        Product c = new Beer("Na miodzie gryczanym", Volume.HALF.getVolume(), 5.50);
-        Product d = new Beer("Lech", Volume.HALF.getVolume(), 2.50);
+
 
         DepotInterface depot = new Depot();
+        depot.prepare();
+
+        System.out.println(depot.currentSize()); // powinno byc 2
+
         try {
-            depot.put(a);
-            depot.put(b);
-            depot.put(c);
+            depot.put(new Beer("Lech", Volume.HALF.getVolume(), 3.00));
+            System.out.println(depot.currentSize()); // powinno byc 3
             depot.take("Lech");
         } catch (Exception e) {
             System.out.println(e);
         }
 
-        System.out.println(depot);
+        System.out.println(depot.currentSize()); // powinno byc 2
+
+        try {
+            depot.take("Lech");
+        } catch (Exception e) {
+            System.out.println(e); // powinien rzucic NotFoundInDepotException
+        }
+
+        try {
+            depot.put(new Beer("Lech", Volume.HALF.getVolume(), 3.00));
+            depot.put(new Beer("Lech", Volume.HALF.getVolume(), 3.00));
+            depot.put(new Beer("Lech", Volume.HALF.getVolume(), 3.00));
+        } catch (Exception e) {
+            System.out.println(e); // powinien rzucic FullDepotException
+        }
     }
 }
 
