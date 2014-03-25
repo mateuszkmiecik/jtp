@@ -6,4 +6,7 @@ package exceptions;
  * @author Mateusz Kmiecik
  */
 public class NotFoundInDepotException extends Exception {
+    public String toString() {
+        return "Product not found in depot.";
+    }
 }

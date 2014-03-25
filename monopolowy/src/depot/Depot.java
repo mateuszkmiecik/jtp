@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @author Mateusz Kmiecik
  */
 public class Depot implements DepotInterface {
-    final static int maxProductsInDepot = 100;
+    final static int maxProductsInDepot = 3;
     private ArrayList<Product> products;
 
     /**
@@ -33,7 +33,7 @@ public class Depot implements DepotInterface {
 
     private Product find(String name) throws NotFoundInDepotException {
         for(Product product : products) {
-            if(product.getName() == name) return product;
+            if(product.getName().equals(name)) return product;
         }
 
         throw new NotFoundInDepotException();

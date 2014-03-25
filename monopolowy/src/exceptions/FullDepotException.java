@@ -6,4 +6,7 @@ package exceptions;
  * @author Mateusz Kmiecik
  */
 public class FullDepotException extends Exception {
+    public String toString() {
+        return "Depot is full.";
+    }
 }

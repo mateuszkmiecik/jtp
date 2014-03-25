@@ -5,7 +5,7 @@ package products;
  *
  * @author Mateusz Kmiecik
  */
-public class Vodka extends Product {
+public final class Vodka extends Product {
 
     public Vodka(String name, double volume, double price) {
         super(name, 40, volume, price);
