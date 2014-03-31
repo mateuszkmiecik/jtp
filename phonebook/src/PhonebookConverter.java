@@ -64,7 +64,7 @@ public class PhonebookConverter {
 
                                 String[] options = { tmp.getNumber(), contact[CSVFields.NUMBER] };
 
-                                System.out.println("Conflict for: " + contact[CSVFields.NAME] + "");
+                                System.out.println("Conflict for: " + contact[CSVFields.NAME]);
                                 System.out.println("[0] - " + tmp.getNumber());
                                 System.out.println("[1] - " + contact[CSVFields.NUMBER]);
                                 Integer input = -1;
@@ -79,6 +79,33 @@ public class PhonebookConverter {
 
                         // mail
                         if(!tmp.getMail().equals(contact[1])){
+
+                            if(tmp.getMail().isEmpty()){
+
+                                mail = contact[CSVFields.MAIL];
+
+                            } else if ( contact[CSVFields.MAIL].isEmpty() ){
+
+                                mail = tmp.getMail();
+
+                            } else {
+                                // resolve conflict
+
+                                String[] options = { tmp.getMail(), contact[CSVFields.MAIL] };
+
+                                System.out.println("Conflict for: " + contact[CSVFields.NAME]);
+                                System.out.println("[0] - " + tmp.getMail());
+                                System.out.println("[1] - " + contact[CSVFields.MAIL]);
+                                Integer input = -1;
+                                while(input < 0 || input > 1){
+                                    System.out.print("Which field is correct: ");
+                                    input = userInput.nextInt();
+                                }
+                                mail = options[input];
+
+                            }
+
+
 
 
 
