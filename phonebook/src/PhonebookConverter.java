@@ -60,6 +60,9 @@ public class PhonebookConverter {
                                 number = tmp.getNumber();
 
                             } else {
+                                // resolve conflict
+
+                                String[] options = { tmp.getNumber(), contact[CSVFields.NUMBER] };
 
                                 System.out.println("Conflict for: " + contact[CSVFields.NAME] + "");
                                 System.out.println("[0] - " + tmp.getNumber());
@@ -69,8 +72,7 @@ public class PhonebookConverter {
                                     System.out.print("Which field is correct: ");
                                     input = userInput.nextInt();
                                 }
-                                System.out.println(input);
-
+                                number = options[input];
 
                             }
                         }
