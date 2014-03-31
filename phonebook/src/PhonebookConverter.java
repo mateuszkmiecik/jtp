@@ -11,6 +11,8 @@ public class PhonebookConverter {
 
     public static void main (String[] argv){
 
+        Scanner userInput = new Scanner(System.in);
+
 
         File file = new File("./import/");
         // Reading directory contents
@@ -38,29 +40,37 @@ public class PhonebookConverter {
                     String name = contact[CSVFields.NAME];
                     String number;
                     String mail;
+                    Integer occurence;
 
                     Contact tmp = contacts.get(name);
                     if(tmp != null){
                         // found, resolve any conflicts
 
-
-
-                        System.out.print(contact[CSVFields.NAME] + ": " + tmp.getOccurrence());
-                        System.out.println();
-
+                        occurence = tmp.getOccurrence() + 1;
 
                         // number
                         if(!tmp.getNumber().equals(contact[CSVFields.NUMBER])){
 
                             if(tmp.getNumber().isEmpty()){
-                                System.out.println("Pobrany pusty");
+
+                                number = contact[CSVFields.NUMBER];
 
                             } else if ( contact[CSVFields.NUMBER].isEmpty() ){
-                                System.out.println("Nowy pusty");
+
+                                number = tmp.getNumber();
 
                             } else {
 
-                                System.out.println("Conflict for: " + contact[CSVFields.NAME]);
+                                System.out.println("Conflict for: " + contact[CSVFields.NAME] + "");
+                                System.out.println("[0] - " + tmp.getNumber());
+                                System.out.println("[1] - " + contact[CSVFields.NUMBER]);
+                                Integer input = -1;
+                                while(input < 0 || input > 1){
+                                    System.out.print("Which field is correct: ");
+                                    input = userInput.nextInt();
+                                }
+                                System.out.println(input);
+
 
                             }
                         }
