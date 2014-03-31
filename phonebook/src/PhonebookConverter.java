@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+import enums.*;
 
 /**
  * Created on 31.03.14.
@@ -34,7 +35,7 @@ public class PhonebookConverter {
                     // single line in file
                     String[] contact = line.split(split, 3); // 3 fields
 
-                    String name = contact[0];
+                    String name = contact[CSVFields.NAME];
                     String number;
                     String mail;
 
@@ -43,24 +44,34 @@ public class PhonebookConverter {
                         // found, resolve any conflicts
 
 
-                        // number
-                        if(!tmp.getNumber().equals(contact[2])){
 
-                            System.out.print(contact[0] + ": ");
+                        System.out.print(contact[CSVFields.NAME] + ": " + tmp.getOccurrence());
+                        System.out.println();
+
+
+                        // number
+                        if(!tmp.getNumber().equals(contact[CSVFields.NUMBER])){
 
                             if(tmp.getNumber().isEmpty()){
                                 System.out.println("Pobrany pusty");
 
-                            } else if ( contact[2].isEmpty() ){
+                            } else if ( contact[CSVFields.NUMBER].isEmpty() ){
                                 System.out.println("Nowy pusty");
 
                             } else {
 
-                                System.out.println("Conflict for:" + contact[0]);
+                                System.out.println("Conflict for: " + contact[CSVFields.NAME]);
 
                             }
+                        }
+
+                        // mail
+                        if(!tmp.getMail().equals(contact[1])){
+
+
 
                         }
+
 
                     }else{
                         // not found
@@ -86,10 +97,10 @@ public class PhonebookConverter {
 
         }
 
-        for(Map.Entry<String, Contact> entry : contacts.entrySet()){
+        /*for(Map.Entry<String, Contact> entry : contacts.entrySet()){
             System.out.println("LUDZ [imie= " + entry.getKey() + " , object="
                     + entry.getValue().getNumber() + "]");
-        }
+        }*/
 
 
     }
