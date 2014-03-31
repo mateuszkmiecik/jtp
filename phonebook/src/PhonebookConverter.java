@@ -38,8 +38,8 @@ public class PhonebookConverter {
                     String[] contact = line.split(split, 3); // 3 fields
 
                     String name = contact[CSVFields.NAME];
-                    String number;
-                    String mail;
+                    String number = contact[CSVFields.NUMBER];
+                    String mail = contact[CSVFields.MAIL];
                     Integer occurence;
 
                     Contact tmp = contacts.get(name);
@@ -104,17 +104,13 @@ public class PhonebookConverter {
                                 mail = options[input];
 
                             }
-
-
-
-
-
                         }
 
+                        contacts.put(name, new Contact(number, mail, occurence));
 
                     }else{
                         // not found
-                        contacts.put(contact[0], new Contact(contact[2], contact[1], 1));
+                        contacts.put(contact[CSVFields.NAME], new Contact(contact[CSVFields.NUMBER], contact[CSVFields.MAIL], 1));
                     }
 
                 }
@@ -136,10 +132,16 @@ public class PhonebookConverter {
 
         }
 
-        /*for(Map.Entry<String, Contact> entry : contacts.entrySet()){
-            System.out.println("LUDZ [imie= " + entry.getKey() + " , object="
-                    + entry.getValue().getNumber() + "]");
-        }*/
+        for(Map.Entry<String, Contact> entry : contacts.entrySet()){
+            System.out.println("[" + entry.getValue().getOccurrence() + "] imie: " + entry.getKey() + " , mail: "
+                    + entry.getValue().getMail() + ", numer: " + entry.getValue().getNumber());
+        }
+
+        SortedSet<String> keys = new TreeSet<String>(contacts.keySet());
+        for (String key : keys) {
+            Contact value = contacts.get(key);
+            System.out.println(key);
+        }
 
 
     }
