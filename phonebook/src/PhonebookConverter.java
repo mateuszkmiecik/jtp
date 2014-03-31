@@ -120,30 +120,46 @@ public class PhonebookConverter {
                 e.printStackTrace();
             } finally {
 
-                if (br != null) {
-                    try {
-                        br.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                if (br != null) try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
             }
 
         }
 
-        for(Map.Entry<String, Contact> entry : contacts.entrySet()){
-            System.out.println("[" + entry.getValue().getOccurrence() + "] imie: " + entry.getKey() + " , mail: "
-                    + entry.getValue().getMail() + ", numer: " + entry.getValue().getNumber());
+        File fileExport = new File("./export/export.csv");
+        try {
+
+            System.out.println("--------------");
+            System.out.println("Exporting file");
+            System.out.println("--------------");
+
+            if (fileExport.exists()) {
+                fileExport.delete();
+            }
+            fileExport.createNewFile();
+
+            FileWriter fw = new FileWriter(fileExport.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            SortedSet<String> keys = new TreeSet<String>(contacts.keySet());
+            for (String key : keys) {
+                Contact value = contacts.get(key);
+                String newLine = key + ","
+                                + value.getMail() + ","
+                                + value.getNumber() + "\n";
+                bw.write(newLine);
+                System.out.println(key + ": " + value.getOccurrence());
+            }
+
+            bw.close();
+
+
+        } catch (Exception e){
+            e.printStackTrace();
         }
-
-        SortedSet<String> keys = new TreeSet<String>(contacts.keySet());
-        for (String key : keys) {
-            Contact value = contacts.get(key);
-            System.out.println(key);
-        }
-
-
     }
-
 }
