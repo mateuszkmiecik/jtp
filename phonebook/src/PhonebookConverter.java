@@ -32,18 +32,39 @@ public class PhonebookConverter {
                 while( (line = br.readLine()) != null){
 
                     // single line in file
-                    String[] contact = line.split(split, 3); // -1 to
+                    String[] contact = line.split(split, 3); // 3 fields
 
-                    Contact tmp = null;
-                    tmp = contacts.get(contact[0]);
+                    String name = contact[0];
+                    String number;
+                    String mail;
+
+                    Contact tmp = contacts.get(name);
                     if(tmp != null){
+                        // found, resolve any conflicts
 
-                        if(tmp.getNumber() != contact[2]){
+
+                        // number
+                        if(!tmp.getNumber().equals(contact[2])){
+
+                            System.out.print(contact[0] + ": ");
+
+                            if(tmp.getNumber().isEmpty()){
+                                System.out.println("Pobrany pusty");
+
+                            } else if ( contact[2].isEmpty() ){
+                                System.out.println("Nowy pusty");
+
+                            } else {
+
+                                System.out.println("Conflict for:" + contact[0]);
+
+                            }
 
                         }
 
                     }else{
-                        contacts.put(contact[0], new Contact(contact[2], contact[1]));
+                        // not found
+                        contacts.put(contact[0], new Contact(contact[2], contact[1], 1));
                     }
 
                 }

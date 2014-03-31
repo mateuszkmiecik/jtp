@@ -9,14 +9,10 @@ public class Contact {
     private Integer occurrence;
 
 
-    public Contact(String number, String mail) {
+    public Contact(String number, String mail, Integer occurrence) {
         this.number = number;
         this.mail = mail;
-        this.occurrence = 1;
-    }
-
-    public void increaseOccurence(){
-        this.occurrence++;
+        this.occurrence = occurrence;
     }
 
     public String getNumber() {
