@@ -1,3 +1,5 @@
+package contact;
+
 /**
  * Created on 31.03.14.
  *
