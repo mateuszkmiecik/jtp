@@ -166,7 +166,6 @@ public class Converter {
                         + value.getMail() + ","
                         + value.getNumber() + "\n";
                 bw.write(newLine);
-                System.out.println(key + ": " + value.getOccurrence());
             }
 
             bw.close();
