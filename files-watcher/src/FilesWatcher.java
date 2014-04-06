@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.nio.file.*;
+
 import ClassLoader.*;
 
 /**
@@ -33,8 +34,16 @@ public class FilesWatcher {
 //
 //        } while (valid);
 
-        System.out.println("hmm");
 
-        ClassManager CM = new ClassManager("lib");
+
+        ClassManager CM = new ClassManager(libFolder);
+
+        try {
+            Class log = CM.loadClass("org.apache.logging.log4j.Logger");
+            Object l = log.getClass();//.getRootLogger();
+            (Logger) lm = l.getRootLogger();
+        } catch (Exception e){
+            System.out.println(e);
+        }
     }
 }
