@@ -1,13 +1,12 @@
 package watcher;
 
+import sermaker.Serializer;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 
 import java.util.logging.Logger;
-
-//import org.apache.logging.log4j.Logger;
-//import org.apache.logging.log4j.LogManager;
 
 
 /**
@@ -20,6 +19,8 @@ public class MainWatcher {
     private static Logger LOGGER = Logger.getLogger("InfoLogging");
 
     private Path watchDir;
+
+    Serializer s = new Serializer();
 
     public MainWatcher(Path watchDir) {
         this.watchDir = watchDir;
@@ -71,6 +72,13 @@ public class MainWatcher {
             moveFile(f, "music");
             LOGGER.info("moving music file: " + f.getName());
             return;
+        }
+
+        if( fileName.endsWith(".ser")){
+
+            s.deserialize(f);
+            return;
+
         }
 
     }

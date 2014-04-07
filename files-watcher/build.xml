@@ -6,9 +6,12 @@
 
     <target name="clean">
         <delete dir="build"/>
+        <delete dir="folder"/>
+        <delete file="employee.ser"/>
     </target>
 
     <target name="compile">
+        <mkdir dir="folder" />
         <mkdir dir="build/classes"/>
         <javac includeantruntime="true" srcdir="src" destdir="build/classes" classpathref="classpath"/>
     </target>

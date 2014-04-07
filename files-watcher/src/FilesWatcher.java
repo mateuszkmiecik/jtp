@@ -4,6 +4,7 @@ import java.nio.file.*;
 
 import classloader.*;
 
+import sermaker.Serializer;
 import watcher.*;
 
 /**
@@ -18,6 +19,10 @@ public class FilesWatcher {
         Path watchFolder = Paths.get("./folder/");
 
         MainWatcher MW = new MainWatcher(watchFolder);
+
+
+        Serializer s = new Serializer();
+        s.create();
 
         MW.watch();
     }
