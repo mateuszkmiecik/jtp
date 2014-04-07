@@ -1,12 +1,16 @@
 <project name="FilesWatcher" default="compile">
 
+    <path id="classpath">
+        <fileset dir="lib" includes="**/*.jar"/>
+    </path>
+
     <target name="clean">
         <delete dir="build"/>
     </target>
 
     <target name="compile">
         <mkdir dir="build/classes"/>
-        <javac includeantruntime="true" srcdir="src" destdir="build/classes"/>
+        <javac includeantruntime="true" srcdir="src" destdir="build/classes" classpathref="classpath"/>
     </target>
 
     <target name="jar">
