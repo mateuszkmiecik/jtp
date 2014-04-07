@@ -16,6 +16,7 @@
     <target name="jar">
         <mkdir dir="build/jar"/>
         <jar destfile="build/jar/FilesWatcher.jar" basedir="build/classes">
+        <zipgroupfileset dir="lib" includes="**/*.jar" />
             <manifest>
                 <attribute name="Main-Class" value="FilesWatcher"/>
             </manifest>
