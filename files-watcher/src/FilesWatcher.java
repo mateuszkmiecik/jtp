@@ -1,7 +1,11 @@
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.nio.file.*;
 
 import ClassLoader.*;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Created on 02.04.14.
@@ -40,8 +44,11 @@ public class FilesWatcher {
 
         try {
             Class log = CM.loadClass("org.apache.logging.log4j.Logger");
-            Object l = log.getClass();//.getRootLogger();
-            (Logger) lm = l.getRootLogger();
+            Method[] me = log.getDeclaredMethods();
+            for(Method m : me){
+                System.out.println(m.toGenericString());
+            }
+
         } catch (Exception e){
             System.out.println(e);
         }
