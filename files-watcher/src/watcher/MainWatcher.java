@@ -77,9 +77,15 @@ public class MainWatcher {
         if( fileName.endsWith(".ser")){
 
             s.deserialize(f);
+            moveFile(f, "serFiles");
+            LOGGER.info("moving ser file: " + f.getName());
             return;
 
         }
+
+        moveFile(f, "unknown");
+        LOGGER.info("moving unknow file: " + f.getName());
+        return;
 
     }
 

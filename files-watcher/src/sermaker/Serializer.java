@@ -36,7 +36,22 @@ public class Serializer {
 
     public void deserialize(File f){
 
+        Employee emp = null;
+        try {
+            FileInputStream fileIn = new FileInputStream(f);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            emp = (Employee) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (FileNotFoundException e){
+            LOGGER.severe("File not found.");
+        } catch (IOException e){
+            LOGGER.severe("IO error happened.");
+        } catch (ClassNotFoundException e){
+            LOGGER.severe("Class not found");
+        }
 
+        LOGGER.info("Name: " + emp.getEmployeeName() + " [id: " + emp.getEmployeeId() + "]");
 
     }
 }

@@ -20,7 +20,6 @@ public class FilesWatcher {
 
         MainWatcher MW = new MainWatcher(watchFolder);
 
-
         Serializer s = new Serializer();
         s.create();
 
