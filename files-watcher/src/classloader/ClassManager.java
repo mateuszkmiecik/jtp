@@ -48,6 +48,7 @@ public class ClassManager extends ClassLoader {
             return findSystemClass(className);
         } catch (ClassNotFoundException e) { }
 
+
         for(File f : files){
             if (filesDone.get(f) == null){
                 filesDone.put(f, true);
@@ -68,6 +69,7 @@ public class ClassManager extends ClassLoader {
                         c = c.replace('/', '.');
 
                         Class newClass = cl.loadClass(className);
+                        System.out.println(className);
                         classes.put(className, newClass);
 
                     }

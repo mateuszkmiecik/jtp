@@ -23,6 +23,7 @@ public class FilesWatcher {
         Serializer s = new Serializer();
         s.create();
 
-        MW.watch();
+        //MW.watch();
+        ClassManager CM = new ClassManager(libFolder);
     }
 }
