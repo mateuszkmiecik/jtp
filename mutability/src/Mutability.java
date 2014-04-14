@@ -16,20 +16,33 @@ public class Mutability {
         System.out.println("This should be [false]: " + equal);
 
 
-        Mutable tmp = new Mutable();
-
-        char[] a = tmp.getChars();
-        char[] a_copy = tmp.getChars().clone();
-        a[1] = 'l';
-        System.out.println(a_copy);
 
         System.out.println();
 
+
+        Mutable tmp = new Mutable();
+        System.out.println("This should be different after changes:");
+        System.out.print(tmp.getChars());
+        System.out.print(" == ");
+        char[] a = tmp.getChars();
+        a[1] = 'l';
+        System.out.println(tmp.getChars());
+        System.out.println("Array a[]:");
+        System.out.println(a);
+
+
+        System.out.println();
+
+
         Immutable tmp2 = new Immutable();
+        System.out.println("This should stay the same after changes:");
+        System.out.print(tmp2.getChars());
+        System.out.print(" == ");
         char[] b = tmp2.getChars();
-        char[] b_copy = tmp.getChars().clone();
         b[1] = 'l';
-        System.out.println(b_copy.toString() + " == " + tmp2.getChars().toString());
+        System.out.println(tmp2.getChars());
+        System.out.println("Array b[]:");
+        System.out.println(b);
 
 
     }
