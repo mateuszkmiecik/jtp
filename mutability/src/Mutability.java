@@ -1,12 +1,13 @@
 import ObjectTypes.Immutable;
 import ObjectTypes.Mutable;
 
+
+import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
+import org.apache.commons.io.*;
 
 import java.io.*;
 import java.util.*;
-
-
 
 /**
  * Created on 14.04.14.
@@ -20,27 +21,44 @@ public class Mutability {
         BufferedReader br = null;
         String line = null;
 
+        List<String> list = new ArrayList<String>();
         try {
-            br = new BufferedReader(new FileReader(new File("import/file-full.csv")));
-
-            while( (line = br.readLine()) != null){
-
+            list = FileUtils.readLines(new File("import/file-full.csv"));
+            Collections.sort(list);
+            for(String l : list){
                 Iterable<String> row =
                         Splitter.on(',')
                                 .trimResults()
                                 .omitEmptyStrings()
-                                .split(line);
-                Iterator<String> i = row.iterator();
-                while(i.hasNext()){
-                    System.out.println(i.toString());
-                }
+                                .split(l);
+
+                System.out.println(row.iterator().next());
             }
+
+            String[] arr = list.toArray(new String[list.size()]);
+
+            String writeString = Joiner.on("\n").join(arr);
 
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        String output = "output.txt";
+        try {
+            FileWriter fw = new FileWriter(output);
+            PrintWriter out = new PrintWriter(fw);
+            for(String l : list){
+                out.println(l);
+            }
+            out.flush();
+            out.close();
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         /*-----*/
 
@@ -78,43 +96,43 @@ public class Mutability {
             }
         }
 
-        System.out.println(words.getProperty("shouldBe"));
-
-        String s = "ABC";
-        Boolean equal = s.equals(s.toLowerCase());
-
-        System.out.println("String s = \"ABC\";");
-        System.out.println("check: s.equals(s.toLowerCase())");
-        System.out.println("This should be [false]: " + equal);
-
-
-
-        System.out.println();
-
-
-        Mutable tmp = new Mutable();
-        System.out.println("This should be different after changes:");
-        System.out.print(tmp.getChars());
-        System.out.print(" == ");
-        char[] a = tmp.getChars();
-        a[1] = 'l';
-        System.out.println(tmp.getChars());
-        System.out.println("Array a[]:");
-        System.out.println(a);
-
-
-        System.out.println();
-
-
-        Immutable tmp2 = new Immutable();
-        System.out.println("This should stay the same after changes:");
-        System.out.print(tmp2.getChars());
-        System.out.print(" == ");
-        char[] b = tmp2.getChars();
-        b[1] = 'l';
-        System.out.println(tmp2.getChars());
-        System.out.println("Array b[]:");
-        System.out.println(b);
+//        System.out.println(words.getProperty("shouldBe"));
+//
+//        String s = "ABC";
+//        Boolean equal = s.equals(s.toLowerCase());
+//
+//        System.out.println("String s = \"ABC\";");
+//        System.out.println("check: s.equals(s.toLowerCase())");
+//        System.out.println("This should be [false]: " + equal);
+//
+//
+//
+//        System.out.println();
+//
+//
+//        Mutable tmp = new Mutable();
+//        System.out.println("This should be different after changes:");
+//        System.out.print(tmp.getChars());
+//        System.out.print(" == ");
+//        char[] a = tmp.getChars();
+//        a[1] = 'l';
+//        System.out.println(tmp.getChars());
+//        System.out.println("Array a[]:");
+//        System.out.println(a);
+//
+//
+//        System.out.println();
+//
+//
+//        Immutable tmp2 = new Immutable();
+//        System.out.println("This should stay the same after changes:");
+//        System.out.print(tmp2.getChars());
+//        System.out.print(" == ");
+//        char[] b = tmp2.getChars();
+//        b[1] = 'l';
+//        System.out.println(tmp2.getChars());
+//        System.out.println("Array b[]:");
+//        System.out.println(b);
 
     }
 }
