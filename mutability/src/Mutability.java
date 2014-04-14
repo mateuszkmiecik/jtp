@@ -1,7 +1,12 @@
-import sun.beans.editors.IntegerEditor;
+import ObjectTypes.Immutable;
+import ObjectTypes.Mutable;
+
+import com.google.common.base.Splitter;
 
 import java.io.*;
 import java.util.*;
+
+
 
 /**
  * Created on 14.04.14.
@@ -11,6 +16,33 @@ import java.util.*;
 public class Mutability {
 
     public static void main(String[] argv){
+
+        BufferedReader br = null;
+        String line = null;
+
+        try {
+            br = new BufferedReader(new FileReader(new File("import/file-full.csv")));
+
+            while( (line = br.readLine()) != null){
+
+                Iterable<String> row =
+                        Splitter.on(',')
+                                .trimResults()
+                                .omitEmptyStrings()
+                                .split(line);
+                Iterator<String> i = row.iterator();
+                while(i.hasNext()){
+                    System.out.println(i.toString());
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        /*-----*/
 
         Properties prop = new Properties();
         InputStream input = null;
