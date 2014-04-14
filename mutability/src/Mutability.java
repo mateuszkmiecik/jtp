@@ -1,5 +1,8 @@
 import sun.beans.editors.IntegerEditor;
 
+import java.io.*;
+import java.util.*;
+
 /**
  * Created on 14.04.14.
  *
@@ -8,6 +11,43 @@ import sun.beans.editors.IntegerEditor;
 public class Mutability {
 
     public static void main(String[] argv){
+
+        Properties prop = new Properties();
+        InputStream input = null;
+
+        try {
+            input = new FileInputStream("lang.properties");
+            prop.load(input);
+        } catch (IOException e){
+            System.out.println("problem with IO");
+        } finally {
+            if (input != null){
+                try {
+                    input.close();
+                } catch (IOException e){
+                    System.out.println("problem with IO");
+                }
+            }
+        }
+        String language = prop.getProperty("language");
+        Properties words = new Properties();
+        try {
+            input = new FileInputStream("langs/"+language+".properties");
+            words.load(input);
+        } catch (IOException e){
+            System.out.println("problem with IO");
+        } finally {
+            if (input != null){
+                try {
+                    input.close();
+                } catch (IOException e){
+                    System.out.println("problem with IO");
+                }
+            }
+        }
+
+        System.out.println(words.getProperty("shouldBe"));
+
         String s = "ABC";
         Boolean equal = s.equals(s.toLowerCase());
 
@@ -43,7 +83,6 @@ public class Mutability {
         System.out.println(tmp2.getChars());
         System.out.println("Array b[]:");
         System.out.println(b);
-
 
     }
 }
