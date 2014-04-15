@@ -1,5 +1,7 @@
 package ObjectTypes;
 
+import Properties.TranslationManager;
+
 /**
  * Created on 15.04.14.
  *
@@ -16,7 +18,7 @@ public class MutsManager {
     }
 
     public void testMutable(){
-        System.out.println("This should be different after changes:");
+        System.out.println(TranslationManager.getSentence("shouldBeDiff"));
         System.out.print(tmp.getChars());
         System.out.print(" == ");
         char[] a = tmp.getChars();
@@ -27,7 +29,7 @@ public class MutsManager {
     }
 
     public void testImmutable(){
-        System.out.println("This should stay the same after changes:");
+        System.out.println(TranslationManager.getSentence("shouldBeSame"));
         System.out.print(tmp2.getChars());
         System.out.print(" == ");
         char[] b = tmp2.getChars();

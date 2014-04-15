@@ -7,12 +7,12 @@
     </path>
 
     <target name="clean">
+        <delete file="output.txt" />
         <delete dir="build"/>
     </target>
 
     <target name="compile" depends="clean">
         <mkdir dir="build/classes"/>
-        <mkdir dir="lib"/>
         <javac includeantruntime="true" srcdir="src" destdir="build/classes" classpathref="classpath"/>
     </target>
 
