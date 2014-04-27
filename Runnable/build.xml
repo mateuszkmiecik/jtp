@@ -26,7 +26,7 @@
     </target>
 
     <target name="run" depends="jar">
-        <java classname="${main-class}" fork="true">
+        <java classname="${main-class}" fork="false">
             <classpath>
                 <path location="build/jar/${main-class}.jar"/>
             </classpath>

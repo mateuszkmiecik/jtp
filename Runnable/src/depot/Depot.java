@@ -1,5 +1,10 @@
 package depot;
 
+import org.fusesource.jansi.AnsiConsole;
+import org.fusesource.jansi.AnsiRenderer;
+
+import static org.fusesource.jansi.Ansi.*;
+import static org.fusesource.jansi.Ansi.Color.*;
 /**
  * Created on 23.04.14.
  *
@@ -66,5 +71,18 @@ public class Depot {
 
     public void setHouses(int houses) {
         this.houses = houses;
+    }
+
+    public void printDepot(){
+        System.out.print(ansi().render(
+                "Trees: @|green " + trees + "|@ "));
+        System.out.print(ansi().render(
+                "Fish: @|blue " + fish + "|@ "));
+        System.out.print(ansi().render(
+                "Houses: @|red " + houses + "|@ "));
+        System.out.print(ansi().render(
+                "Wood: @|yellow " + wood + "|@ "));
+        System.out.println(ansi().render(
+                "Stone: @|white " + stone + "|@ "));
     }
 }
