@@ -23,6 +23,8 @@ public class Village {
     private List fishermen = new ArrayList();
     private List woodcutters = new ArrayList();
     private List foresters = new ArrayList();
+    private List quarrymen = new ArrayList();
+    private List builders = new ArrayList();
 
     public Village() {
     }
@@ -37,7 +39,7 @@ public class Village {
 
         boolean running = true;
 
-        while(running) {
+        while(running){
             String[] args = getCommand();
 
             if (args[0].equals("stats")) {
@@ -45,6 +47,9 @@ public class Village {
             } else if (args[0].equals("add")) {
                 String[] newArgs = Arrays.copyOfRange(args, 1, args.length);
                 commandAdd(newArgs);
+            } else if (args[0].equals("remove")) {
+                String[] newArgs = Arrays.copyOfRange(args, 1, args.length);
+                commandRemove(newArgs);
             } else if (args[0].equals("exit")) {
                 running = false;
             } else {
@@ -60,11 +65,15 @@ public class Village {
 
     private void printWorkers(){
         System.out.print(ansi().render(
-                "Fishermen: @|green " + fishermen.size() + "|@ "));
+                "Foresters: @|green " + foresters.size() + "|@ "));
         System.out.print(ansi().render(
-                "Woodcutters: @|blue " + woodcutters.size() + "|@ "));
+                "Fishermen: @|blue " + fishermen.size() + "|@ "));
+        System.out.print(ansi().render(
+                "Builders: @|red " + builders.size() + "|@ "));
+        System.out.print(ansi().render(
+                "Woodcutters: @|yellow " + woodcutters.size() + "|@ "));
         System.out.println(ansi().render(
-                "Foresters: @|red " + foresters.size() + "|@ "));
+                "Quarrymen: @|white " + quarrymen.size() + "|@ "));
     }
 
     private void printVillage(){
@@ -91,7 +100,7 @@ public class Village {
     private void commandAdd(String[] args){
         if(args.length == 0){
             System.out.println("Usage: add [worker]");
-            System.out.println("Available workers: fish, wood, stone, forest");
+            System.out.println("Available workers for: fish, wood, stone, tree, house");
         } else {
             if(args[0].equals("fish")){
                 Fisherman f = new Fisherman();
@@ -100,6 +109,104 @@ public class Village {
 
                 printVillage();
                 return;
+            }
+
+            if(args[0].equals("wood")){
+                Woodcutter w = new Woodcutter();
+                woodcutters.add(w);
+                w.start();
+
+                printVillage();
+                return;
+            }
+
+            if(args[0].equals("stone")){
+                Quarryman w = new Quarryman();
+                quarrymen.add(w);
+                w.start();
+
+                printVillage();
+                return;
+            }
+
+            if(args[0].equals("house")){
+                Builder w = new Builder();
+                builders.add(w);
+                w.start();
+
+                printVillage();
+                return;
+            }
+
+            if(args[0].equals("tree")){
+                Forester w = new Forester();
+                foresters.add(w);
+                w.start();
+
+                printVillage();
+                return;
+            }
+
+            System.out.println("Usage: add [worker]");
+            System.out.println("Available workers for: fish, wood, stone, tree, house");
+        }
+    }
+
+    private void commandRemove(String[] args){
+        if (args.length == 0){
+            System.out.println("Usage: remove [worker]");
+            System.out.println("Available workers for: fish, wood, stone, tree, house");
+        }else{
+
+            if(args[0].equals("wood")){
+                if(woodcutters.size() > 0){
+                    Woodcutter w = (Woodcutter)woodcutters.get(0);
+                    w.stop();
+                    woodcutters.remove(0);
+
+                    printVillage();
+                    return;
+                }
+            }
+            if(args[0].equals("fish")){
+                if(fishermen.size() > 0){
+                    Fisherman f = (Fisherman)fishermen.get(0);
+                    f.stop();
+                    fishermen.remove(0);
+
+                    printVillage();
+                    return;
+                }
+            }
+            if(args[0].equals("stone")){
+                if(quarrymen.size() > 0){
+                    Quarryman f = (Quarryman)quarrymen.get(0);
+                    f.stop();
+                    quarrymen.remove(0);
+
+                    printVillage();
+                    return;
+                }
+            }
+            if(args[0].equals("tree")){
+                if(foresters.size() > 0){
+                    Forester f = (Forester)foresters.get(0);
+                    f.terminate();
+                    foresters.remove(0);
+
+                    printVillage();
+                    return;
+                }
+            }
+            if(args[0].equals("house")){
+                if(builders.size() > 0){
+                    Builder f = (Builder)builders.get(0);
+                    f.stop();
+                    builders.remove(0);
+
+                    printVillage();
+                    return;
+                }
             }
         }
     }

@@ -2,27 +2,27 @@ package workers;
 
 import depot.Depot;
 
-import java.util.Date;
-
-import static org.fusesource.jansi.Ansi.ansi;
-
 /**
- * Created on 27.04.14.
+ * Created on 28.04.14.
  *
  * @author mk
  */
-public class Fisherman extends Thread {
+public class Woodcutter extends Thread {
 
     private Depot depot = Depot.getInstance();
 
-    public Fisherman() {
+    public Woodcutter() {
         super();
     }
 
     @Override
     public void run() {
         while(true) {
-            depot.setFish(depot.getFish() + 1);
+            if(depot.getFish() > 0 && depot.getTrees() > 0){
+                depot.setFish(depot.getFish()-1);
+                depot.setWood(depot.getWood()+1);
+                depot.setTrees(depot.getTrees()-1);
+            }
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
