@@ -15,9 +15,11 @@ public class Woodcutter extends Thread {
         super();
     }
 
+    private boolean runner = true;
+
     @Override
     public void run() {
-        while(true) {
+        while(runner) {
             if(depot.getFish() > 0 && depot.getTrees() > 0){
                 depot.setFish(depot.getFish()-1);
                 depot.setWood(depot.getWood()+1);
@@ -29,6 +31,10 @@ public class Woodcutter extends Thread {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void terminate(){
+        this.runner = false;
     }
 
 }

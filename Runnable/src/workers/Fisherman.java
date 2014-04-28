@@ -19,9 +19,11 @@ public class Fisherman extends Thread {
         super();
     }
 
+    private boolean runner = true;
+
     @Override
     public void run() {
-        while(true) {
+        while(runner) {
             depot.setFish(depot.getFish() + 1);
             try {
                 Thread.sleep(2000);
@@ -29,6 +31,10 @@ public class Fisherman extends Thread {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void terminate(){
+        this.runner = false;
     }
 
 }

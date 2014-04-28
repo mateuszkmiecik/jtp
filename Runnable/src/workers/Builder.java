@@ -17,9 +17,11 @@ public class Builder extends Thread {
         super();
     }
 
+    private boolean runner = true;
+
     @Override
     public void run() {
-        while(true) {
+        while(runner) {
             if(depot.getFish() > 1 && depot.getStone() > 2 && depot.getWood() > 2){
                 depot.setFish(depot.getFish()-2);
                 depot.setStone(depot.getStone()-3);
@@ -32,5 +34,9 @@ public class Builder extends Thread {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void terminate(){
+        this.runner = false;
     }
 }

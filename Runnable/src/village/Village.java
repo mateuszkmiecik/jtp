@@ -2,6 +2,7 @@ package village;
 
 import com.google.common.collect.Iterables;
 import depot.Depot;
+import utils.TimeTracker;
 import workers.*;
 
 import java.util.ArrayList;
@@ -35,7 +36,6 @@ public class Village {
     public void startLife() throws InterruptedException {
 
         printVillage();
-        printInfo();
 
         boolean running = true;
 
@@ -52,13 +52,10 @@ public class Village {
                 commandRemove(newArgs);
             } else if (args[0].equals("exit")) {
                 running = false;
+                doExit();
             } else {
-                System.out.println("Unknown command.");
-                printInfo();
+                System.out.println("Unknown command. Check README for help.");
             }
-
-
-
 
         }
     }
@@ -80,10 +77,6 @@ public class Village {
 
         depot.printDepot();
         printWorkers();
-    }
-
-    private void printInfo(){
-        System.out.println("If you dont know what to do type 'help'");
     }
 
     private String[] getCommand(){
@@ -161,7 +154,7 @@ public class Village {
             if(args[0].equals("wood")){
                 if(woodcutters.size() > 0){
                     Woodcutter w = (Woodcutter)woodcutters.get(0);
-                    w.stop();
+                    w.terminate();
                     woodcutters.remove(0);
 
                     printVillage();
@@ -171,7 +164,7 @@ public class Village {
             if(args[0].equals("fish")){
                 if(fishermen.size() > 0){
                     Fisherman f = (Fisherman)fishermen.get(0);
-                    f.stop();
+                    f.terminate();
                     fishermen.remove(0);
 
                     printVillage();
@@ -181,7 +174,7 @@ public class Village {
             if(args[0].equals("stone")){
                 if(quarrymen.size() > 0){
                     Quarryman f = (Quarryman)quarrymen.get(0);
-                    f.stop();
+                    f.terminate();
                     quarrymen.remove(0);
 
                     printVillage();
@@ -201,7 +194,7 @@ public class Village {
             if(args[0].equals("house")){
                 if(builders.size() > 0){
                     Builder f = (Builder)builders.get(0);
-                    f.stop();
+                    f.terminate();
                     builders.remove(0);
 
                     printVillage();
@@ -209,5 +202,11 @@ public class Village {
                 }
             }
         }
+    }
+
+    private void doExit(){
+        TimeTracker TT = TimeTracker.getInstance();
+
+        System.out.println(TT.stoneTimes.size());
     }
 }
