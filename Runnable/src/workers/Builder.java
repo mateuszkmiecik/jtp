@@ -1,6 +1,8 @@
 package workers;
 
 import depot.Depot;
+import org.jfree.data.time.SimpleTimePeriod;
+import utils.TimeTracker;
 
 import java.util.Date;
 
@@ -12,9 +14,14 @@ import java.util.Date;
 public class Builder extends Thread {
 
     Depot depot = Depot.getInstance();
+    private TimeTracker TT = TimeTracker.getInstance();
+
+    private Date startTime;
+    private Date endTime;
 
     public Builder() {
         super();
+        startTime = new Date();
     }
 
     private boolean runner = true;
@@ -38,5 +45,7 @@ public class Builder extends Thread {
 
     public void terminate(){
         this.runner = false;
+        endTime = new Date();
+        TT.houseTimes.add(new SimpleTimePeriod(startTime, endTime));
     }
 }

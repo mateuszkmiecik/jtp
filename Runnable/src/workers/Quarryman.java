@@ -12,8 +12,8 @@ import java.util.Date;
  * @author mk
  */
 public class Quarryman extends Thread {
-    private Depot depot = Depot.getInstance();
 
+    private Depot depot = Depot.getInstance();
     private TimeTracker TT = TimeTracker.getInstance();
 
     private Date startTime;

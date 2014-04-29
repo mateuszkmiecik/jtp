@@ -8,6 +8,7 @@
 
     <target name="clean">
         <delete dir="build"/>
+        <delete file="graph.jpg" />
     </target>
 
     <target name="compile" depends="clean">

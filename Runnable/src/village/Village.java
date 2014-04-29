@@ -2,7 +2,7 @@ package village;
 
 import com.google.common.collect.Iterables;
 import depot.Depot;
-import utils.TimeTracker;
+import utils.Grapher;
 import workers.*;
 
 import java.util.ArrayList;
@@ -205,8 +205,32 @@ public class Village {
     }
 
     private void doExit(){
-        TimeTracker TT = TimeTracker.getInstance();
+        while(builders.size() > 0){
+            Builder f = (Builder)builders.get(0);
+            f.terminate();
+            builders.remove(0);
+        }
+        while(foresters.size() > 0){
+            Forester f = (Forester)foresters.get(0);
+            f.terminate();
+            foresters.remove(0);
+        }
+        while(quarrymen.size() > 0){
+            Quarryman f = (Quarryman)quarrymen.get(0);
+            f.terminate();
+            quarrymen.remove(0);
+        }
+        while(fishermen.size() > 0) {
+            Fisherman f = (Fisherman) fishermen.get(0);
+            f.terminate();
+            fishermen.remove(0);
+        }
+        while(woodcutters.size() > 0){
+            Woodcutter w = (Woodcutter)woodcutters.get(0);
+            w.terminate();
+            woodcutters.remove(0);
+        }
 
-        System.out.println(TT.stoneTimes.size());
+        Grapher.makeGraph();
     }
 }

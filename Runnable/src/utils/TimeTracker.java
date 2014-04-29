@@ -1,5 +1,7 @@
 package utils;
 
+import org.jfree.data.time.SimpleTimePeriod;
+
 import java.util.ArrayList;
 
 /**
@@ -18,11 +20,10 @@ public class TimeTracker {
         return Instance;
     }
 
-    public ArrayList woodTimes = new ArrayList();
-    public ArrayList fishTimes = new ArrayList();
-    public ArrayList stoneTimes = new ArrayList();
-    public ArrayList treeTimes = new ArrayList();
-    public ArrayList houseTimes = new ArrayList();
-
+    public ArrayList<SimpleTimePeriod> woodTimes = new ArrayList<SimpleTimePeriod>();
+    public ArrayList<SimpleTimePeriod> fishTimes = new ArrayList<SimpleTimePeriod>();
+    public ArrayList<SimpleTimePeriod> stoneTimes = new ArrayList<SimpleTimePeriod>();
+    public ArrayList<SimpleTimePeriod> treeTimes = new ArrayList<SimpleTimePeriod>();
+    public ArrayList<SimpleTimePeriod> houseTimes = new ArrayList<SimpleTimePeriod>();
 
 }

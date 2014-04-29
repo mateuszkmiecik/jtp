@@ -1,6 +1,10 @@
 package workers;
 
 import depot.Depot;
+import org.jfree.data.time.SimpleTimePeriod;
+import utils.TimeTracker;
+
+import java.util.Date;
 
 /**
  * Created on 28.04.14.
@@ -10,9 +14,14 @@ import depot.Depot;
 public class Woodcutter extends Thread {
 
     private Depot depot = Depot.getInstance();
+    private TimeTracker TT = TimeTracker.getInstance();
+
+    private Date startTime;
+    private Date endTime;
 
     public Woodcutter() {
         super();
+        startTime = new Date();
     }
 
     private boolean runner = true;
@@ -35,6 +44,8 @@ public class Woodcutter extends Thread {
 
     public void terminate(){
         this.runner = false;
+        endTime = new Date();
+        TT.woodTimes.add(new SimpleTimePeriod(startTime, endTime));
     }
 
 }
