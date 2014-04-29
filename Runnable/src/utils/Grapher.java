@@ -59,7 +59,7 @@ public class Grapher {
         Iterator<SimpleTimePeriod> t = TT.treeTimes.iterator();
         i = 1;
         while(t.hasNext()){
-            seriesTrees.add(new Task("Woodcutter #" + i, t.next()));
+            seriesTrees.add(new Task("Forester #" + i, t.next()));
             i++;
         }
 
